@@ -7,8 +7,7 @@
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css">
-        <link rel="stylesheet" href="css/qgis2web.css">
-        <link rel="stylesheet" href="css/leaflet-search.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
         <style>
         html, body, #map {
             width: 100%;
@@ -31,424 +30,557 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
-        <script src="js/leaflet-search.js"></script>
-        <script src="data/LimiteComunal_0.js"></script>
-        <script src="data/SanJuandePicheAltosdeCantillana_1.js"></script>
-        <script src="data/RobleradelcobredeLoncha_2.js"></script>
-        <script src="data/CerrosdeAlhu_3.js"></script>
-        <script src="data/AtractivostursticosdeAlhu_4.js"></script>
+        <script src="data/ComunadeAlhu_1.js"></script>
+        <script src="data/RobleradelCobredeLoncha_2.js"></script>
+        <script src="data/Santuariosdelanaturaleza_3.js"></script>
+        <script src="data/Cerros_4.js"></script>
+        <script src="data/HitostursticosdeAlhu_5.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[-34.156571392,-71.3592340907],[-33.8549750982,-70.8102230041]]);
+        }).fitBounds([[-34.10337306885577,-71.16928795333843],[-33.98456211229359,-70.93651642214768]]);
         var hash = new L.Hash(map);
-        map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a>');
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
         var bounds_group = new L.featureGroup([]);
-        var basemap0 = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>,Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>',
-            maxZoom: 28
-        });
-        basemap0.addTo(map);
         function setBounds() {
         }
-        function pop_LimiteComunal_0(feature, layer) {
+        map.createPane('pane_OSMStandard_0');
+        map.getPane('pane_OSMStandard_0').style.zIndex = 400;
+        var layer_OSMStandard_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OSMStandard_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OSMStandard_0;
+        map.addLayer(layer_OSMStandard_0);
+        function pop_ComunadeAlhu_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CUT_REG'] !== null ? autolinker.link(feature.properties['CUT_REG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CUT_PROV'] !== null ? autolinker.link(feature.properties['CUT_PROV'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CUT_COM'] !== null ? autolinker.link(feature.properties['CUT_COM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['REGION'] !== null ? autolinker.link(feature.properties['REGION'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PROVINCIA'] !== null ? autolinker.link(feature.properties['PROVINCIA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COMUNA'] !== null ? autolinker.link(feature.properties['COMUNA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_LimiteComunal_0_0() {
+        function style_ComunadeAlhu_1_0() {
             return {
-                pane: 'pane_LimiteComunal_0',
+                pane: 'pane_ComunadeAlhu_1',
                 opacity: 1,
                 color: 'rgba(51,160,44,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 2.0, 
+                weight: 1.0, 
                 fillOpacity: 0,
+                interactive: false,
             }
         }
-        map.createPane('pane_LimiteComunal_0');
-        map.getPane('pane_LimiteComunal_0').style.zIndex = 400;
-        map.getPane('pane_LimiteComunal_0').style['mix-blend-mode'] = 'normal';
-        var layer_LimiteComunal_0 = new L.geoJson(json_LimiteComunal_0, {
-            attribution: '<a href=""></a>',
-            pane: 'pane_LimiteComunal_0',
-            onEachFeature: pop_LimiteComunal_0,
-            style: style_LimiteComunal_0_0,
+        map.createPane('pane_ComunadeAlhu_1');
+        map.getPane('pane_ComunadeAlhu_1').style.zIndex = 401;
+        map.getPane('pane_ComunadeAlhu_1').style['mix-blend-mode'] = 'normal';
+        var layer_ComunadeAlhu_1 = new L.geoJson(json_ComunadeAlhu_1, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_ComunadeAlhu_1',
+            layerName: 'layer_ComunadeAlhu_1',
+            pane: 'pane_ComunadeAlhu_1',
+            onEachFeature: pop_ComunadeAlhu_1,
+            style: style_ComunadeAlhu_1_0,
         });
-        bounds_group.addLayer(layer_LimiteComunal_0);
-        map.addLayer(layer_LimiteComunal_0);
-        function pop_SanJuandePicheAltosdeCantillana_1(feature, layer) {
+        bounds_group.addLayer(layer_ComunadeAlhu_1);
+        map.addLayer(layer_ComunadeAlhu_1);
+        function pop_RobleradelCobredeLoncha_2(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['NAME'] !== null ? Autolinker.link(String(feature.properties['NAME'])) : '') + '</td>\
+                        <th scope="row">SNASPE</th>\
+                        <td>' + (feature.properties['SNASPE'] !== null ? autolinker.link(feature.properties['SNASPE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TIPO'] !== null ? autolinker.link(feature.properties['TIPO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SUPERFICIE'] !== null ? autolinker.link(feature.properties['SUPERFICIE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DESCRIP'] !== null ? autolinker.link(feature.properties['DESCRIP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COD_COMUNA'] !== null ? autolinker.link(feature.properties['COD_COMUNA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COD_REGI'] !== null ? autolinker.link(feature.properties['COD_REGI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOM_REGION'] !== null ? autolinker.link(feature.properties['NOM_REGION'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COD_PROV'] !== null ? autolinker.link(feature.properties['COD_PROV'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOM_PROVI'] !== null ? autolinker.link(feature.properties['NOM_PROVI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CIR_SENA'] !== null ? autolinker.link(feature.properties['CIR_SENA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DIS_ELEC'] !== null ? autolinker.link(feature.properties['DIS_ELEC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_Leng'] !== null ? autolinker.link(feature.properties['SHAPE_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_Area'] !== null ? autolinker.link(feature.properties['SHAPE_Area'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_SanJuandePicheAltosdeCantillana_1_0() {
+        function style_RobleradelCobredeLoncha_2_0() {
             return {
-                pane: 'pane_SanJuandePicheAltosdeCantillana_1',
+                pane: 'pane_RobleradelCobredeLoncha_2',
                 stroke: false, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(178,223,138,1.0)',
+                fillColor: 'rgba(145,223,72,1.0)',
+                interactive: true,
             }
         }
-        map.createPane('pane_SanJuandePicheAltosdeCantillana_1');
-        map.getPane('pane_SanJuandePicheAltosdeCantillana_1').style.zIndex = 401;
-        map.getPane('pane_SanJuandePicheAltosdeCantillana_1').style['mix-blend-mode'] = 'normal';
-        var layer_SanJuandePicheAltosdeCantillana_1 = new L.geoJson(json_SanJuandePicheAltosdeCantillana_1, {
-            attribution: '<a href=""></a>',
-            pane: 'pane_SanJuandePicheAltosdeCantillana_1',
-            onEachFeature: pop_SanJuandePicheAltosdeCantillana_1,
-            style: style_SanJuandePicheAltosdeCantillana_1_0,
+        map.createPane('pane_RobleradelCobredeLoncha_2');
+        map.getPane('pane_RobleradelCobredeLoncha_2').style.zIndex = 402;
+        map.getPane('pane_RobleradelCobredeLoncha_2').style['mix-blend-mode'] = 'normal';
+        var layer_RobleradelCobredeLoncha_2 = new L.geoJson(json_RobleradelCobredeLoncha_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_RobleradelCobredeLoncha_2',
+            layerName: 'layer_RobleradelCobredeLoncha_2',
+            pane: 'pane_RobleradelCobredeLoncha_2',
+            onEachFeature: pop_RobleradelCobredeLoncha_2,
+            style: style_RobleradelCobredeLoncha_2_0,
         });
-        bounds_group.addLayer(layer_SanJuandePicheAltosdeCantillana_1);
-        map.addLayer(layer_SanJuandePicheAltosdeCantillana_1);
-        function pop_RobleradelcobredeLoncha_2(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['SNASPE'] !== null ? Autolinker.link(String(feature.properties['SNASPE'])) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
-
-        function style_RobleradelcobredeLoncha_2_0() {
-            return {
-                pane: 'pane_RobleradelcobredeLoncha_2',
-                stroke: false, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(195,244,104,0.9)',
-            }
-        }
-        map.createPane('pane_RobleradelcobredeLoncha_2');
-        map.getPane('pane_RobleradelcobredeLoncha_2').style.zIndex = 402;
-        map.getPane('pane_RobleradelcobredeLoncha_2').style['mix-blend-mode'] = 'normal';
-        var layer_RobleradelcobredeLoncha_2 = new L.geoJson(json_RobleradelcobredeLoncha_2, {
-            attribution: '<a href=""></a>',
-            pane: 'pane_RobleradelcobredeLoncha_2',
-            onEachFeature: pop_RobleradelcobredeLoncha_2,
-            style: style_RobleradelcobredeLoncha_2_0,
-        });
-        bounds_group.addLayer(layer_RobleradelcobredeLoncha_2);
-        map.addLayer(layer_RobleradelcobredeLoncha_2);
-        function pop_CerrosdeAlhu_3(feature, layer) {
+        bounds_group.addLayer(layer_RobleradelCobredeLoncha_2);
+        map.addLayer(layer_RobleradelCobredeLoncha_2);
+        function pop_Santuariosdelanaturaleza_3(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Nombre</th>\
-                        <td>' + (feature.properties['Nombre'] !== null ? Autolinker.link(String(feature.properties['Nombre'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Altitud'] !== null ? Autolinker.link(String(feature.properties['Altitud'])) : '') + '</td>\
+                        <td>' + (feature.properties['Nombre'] !== null ? autolinker.link(feature.properties['Nombre'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_CerrosdeAlhu_3_0(feature) {
+        function style_Santuariosdelanaturaleza_3_0() {
+            return {
+                pane: 'pane_Santuariosdelanaturaleza_3',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,223,72,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Santuariosdelanaturaleza_3');
+        map.getPane('pane_Santuariosdelanaturaleza_3').style.zIndex = 403;
+        map.getPane('pane_Santuariosdelanaturaleza_3').style['mix-blend-mode'] = 'normal';
+        var layer_Santuariosdelanaturaleza_3 = new L.geoJson(json_Santuariosdelanaturaleza_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Santuariosdelanaturaleza_3',
+            layerName: 'layer_Santuariosdelanaturaleza_3',
+            pane: 'pane_Santuariosdelanaturaleza_3',
+            onEachFeature: pop_Santuariosdelanaturaleza_3,
+            style: style_Santuariosdelanaturaleza_3_0,
+        });
+        bounds_group.addLayer(layer_Santuariosdelanaturaleza_3);
+        map.addLayer(layer_Santuariosdelanaturaleza_3);
+        function pop_Cerros_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Nombre</th>\
+                        <td>' + (feature.properties['Nombre'] !== null ? autolinker.link(feature.properties['Nombre'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Altitud'] !== null ? autolinker.link(feature.properties['Altitud'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Cerros_4_0(feature) {
             switch(String(feature.properties['Nombre'])) {
                 case 'Alto de Cantillana':
                     return {
-                pane: 'pane_CerrosdeAlhu_3',
+                pane: 'pane_Cerros_4',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/montana.svg',
-            iconSize: [22.8, 22.8]
+            iconSize: [22.799999999999997, 22.799999999999997]
         }),
+                interactive: true,
             }
                     break;
-                case 'El Morro':
+                case 'Morro de Talamí':
                     return {
-                pane: 'pane_CerrosdeAlhu_3',
+                pane: 'pane_Cerros_4',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/montana.svg',
-            iconSize: [22.8, 22.8]
+            iconSize: [22.799999999999997, 22.799999999999997]
         }),
+                interactive: true,
             }
                     break;
             }
         }
-        map.createPane('pane_CerrosdeAlhu_3');
-        map.getPane('pane_CerrosdeAlhu_3').style.zIndex = 403;
-        map.getPane('pane_CerrosdeAlhu_3').style['mix-blend-mode'] = 'normal';
-        var layer_CerrosdeAlhu_3 = new L.geoJson(json_CerrosdeAlhu_3, {
-            attribution: '<a href=""></a>',
-            pane: 'pane_CerrosdeAlhu_3',
-            onEachFeature: pop_CerrosdeAlhu_3,
+        map.createPane('pane_Cerros_4');
+        map.getPane('pane_Cerros_4').style.zIndex = 404;
+        map.getPane('pane_Cerros_4').style['mix-blend-mode'] = 'normal';
+        var layer_Cerros_4 = new L.geoJson(json_Cerros_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Cerros_4',
+            layerName: 'layer_Cerros_4',
+            pane: 'pane_Cerros_4',
+            onEachFeature: pop_Cerros_4,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_CerrosdeAlhu_3_0(feature));
+                return L.marker(latlng, style_Cerros_4_0(feature));
             },
         });
-        bounds_group.addLayer(layer_CerrosdeAlhu_3);
-        map.addLayer(layer_CerrosdeAlhu_3);
-        function pop_AtractivostursticosdeAlhu_4(feature, layer) {
+        bounds_group.addLayer(layer_Cerros_4);
+        map.addLayer(layer_Cerros_4);
+        function pop_HitostursticosdeAlhu_5(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Atractivo'] !== null ? Autolinker.link(String(feature.properties['Atractivo'])) : '') + '</td>\
+                        <td colspan="2"><strong>Atractivo</strong><br />' + (feature.properties['Atractivo'] !== null ? autolinker.link(feature.properties['Atractivo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Tipo'] !== null ? autolinker.link(feature.properties['Tipo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Localidad</strong><br />' + (feature.properties['Localidad'] !== null ? autolinker.link(feature.properties['Localidad'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['N°'] !== null ? autolinker.link(feature.properties['N°'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_AtractivostursticosdeAlhu_4_0(feature) {
-            switch(String(feature.properties['q2wHide_Tipo'])) {
+        function style_HitostursticosdeAlhu_5_0(feature) {
+            switch(String(feature.properties['Tipo'])) {
                 case 'Actividad aire libre':
                     return {
-                pane: 'pane_AtractivostursticosdeAlhu_4',
+                pane: 'pane_HitostursticosdeAlhu_5',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/bicycle.svg',
-            iconSize: [22.8, 22.8]
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
+                interactive: true,
             }
                     break;
                 case 'Actividad Apicola':
                     return {
-                pane: 'pane_AtractivostursticosdeAlhu_4',
+                pane: 'pane_HitostursticosdeAlhu_5',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/abeja.svg',
-            iconSize: [22.8, 22.8]
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
+                interactive: true,
             }
                     break;
                 case 'Alojamiento':
                     return {
-                pane: 'pane_AtractivostursticosdeAlhu_4',
+                pane: 'pane_HitostursticosdeAlhu_5',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/hotel.svg',
-            iconSize: [22.8, 22.8]
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
+                interactive: true,
             }
                     break;
                 case 'Artesanía':
                     return {
-                pane: 'pane_AtractivostursticosdeAlhu_4',
+                pane: 'pane_HitostursticosdeAlhu_5',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/arcilla.svg',
-            iconSize: [22.8, 22.8]
+            iconUrl: 'markers/poncho (1).svg',
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
+                interactive: true,
             }
                     break;
                 case 'Atractivo local':
                     return {
-                pane: 'pane_AtractivostursticosdeAlhu_4',
+                pane: 'pane_HitostursticosdeAlhu_5',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/marcador-de-posicion.svg',
-            iconSize: [22.8, 22.8]
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
+                interactive: true,
             }
                     break;
                 case 'Atractivo natural':
                     return {
-                pane: 'pane_AtractivostursticosdeAlhu_4',
+                pane: 'pane_HitostursticosdeAlhu_5',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/natur.svg',
-            iconSize: [22.8, 22.8]
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
+                interactive: true,
             }
                     break;
                 case 'Atractivo patrimonial':
                     return {
-                pane: 'pane_AtractivostursticosdeAlhu_4',
+                pane: 'pane_HitostursticosdeAlhu_5',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/guitar.svg',
-            iconSize: [22.8, 22.8]
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
+                interactive: true,
             }
                     break;
                 case 'Biblioteca':
                     return {
-                pane: 'pane_AtractivostursticosdeAlhu_4',
+                pane: 'pane_HitostursticosdeAlhu_5',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/reading-book.svg',
-            iconSize: [22.8, 22.8]
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
+                interactive: true,
             }
                     break;
                 case 'Cementerio':
                     return {
-                pane: 'pane_AtractivostursticosdeAlhu_4',
+                pane: 'pane_HitostursticosdeAlhu_5',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/cementerio.svg',
-            iconSize: [22.8, 22.8]
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
+                interactive: true,
             }
                     break;
                 case 'Centro de salud':
                     return {
-                pane: 'pane_AtractivostursticosdeAlhu_4',
+                pane: 'pane_HitostursticosdeAlhu_5',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/cross.svg',
-            iconSize: [22.8, 22.8]
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
+                interactive: true,
             }
                     break;
                 case 'Estadio':
                     return {
-                pane: 'pane_AtractivostursticosdeAlhu_4',
+                pane: 'pane_HitostursticosdeAlhu_5',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/estadio.svg',
-            iconSize: [22.8, 22.8]
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
+                interactive: true,
             }
                     break;
                 case 'Hito religioso':
                     return {
-                pane: 'pane_AtractivostursticosdeAlhu_4',
+                pane: 'pane_HitostursticosdeAlhu_5',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/ubicacion.svg',
-            iconSize: [22.8, 22.8]
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
+                interactive: true,
             }
                     break;
                 case 'Iglesia San Jerónimo':
                     return {
-                pane: 'pane_AtractivostursticosdeAlhu_4',
+                pane: 'pane_HitostursticosdeAlhu_5',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/church.svg',
-            iconSize: [22.8, 22.8]
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
+                interactive: true,
             }
                     break;
                 case 'Molino':
                     return {
-                pane: 'pane_AtractivostursticosdeAlhu_4',
+                pane: 'pane_HitostursticosdeAlhu_5',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/molino.svg',
-            iconSize: [22.8, 22.8]
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
+                interactive: true,
             }
                     break;
-                case 'Municipalidad':
+                case 'Monumento Histórico Nacional':
                     return {
-                pane: 'pane_AtractivostursticosdeAlhu_4',
+                pane: 'pane_HitostursticosdeAlhu_5',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/ayuntamiento.svg',
-            iconSize: [22.8, 22.8]
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
+                interactive: true,
             }
                     break;
-                case 'Museo':
+                case 'Municipalidad':
                     return {
-                pane: 'pane_AtractivostursticosdeAlhu_4',
+                pane: 'pane_HitostursticosdeAlhu_5',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/museo.svg',
-            iconSize: [22.8, 22.8]
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
+                interactive: true,
+            }
+                    break;
+                case 'Museo':
+                    return {
+                pane: 'pane_HitostursticosdeAlhu_5',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/ayuntamiento.svg',
+            iconSize: [26.599999999999998, 26.599999999999998]
+        }),
+                interactive: true,
             }
                     break;
                 case 'Negocio local':
                     return {
-                pane: 'pane_AtractivostursticosdeAlhu_4',
+                pane: 'pane_HitostursticosdeAlhu_5',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/puesto.svg',
-            iconSize: [22.8, 22.8]
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
+                interactive: true,
             }
                     break;
                 case 'Plaza/Parque':
                     return {
-                pane: 'pane_AtractivostursticosdeAlhu_4',
+                pane: 'pane_HitostursticosdeAlhu_5',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/naturaleza.svg',
-            iconSize: [22.8, 22.8]
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
+                interactive: true,
             }
                     break;
                 case 'Restaurant':
                     return {
-                pane: 'pane_AtractivostursticosdeAlhu_4',
+                pane: 'pane_HitostursticosdeAlhu_5',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/cubiertos.svg',
-            iconSize: [22.8, 22.8]
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
+                interactive: true,
             }
                     break;
                 case 'Turismo':
                     return {
-                pane: 'pane_AtractivostursticosdeAlhu_4',
+                pane: 'pane_HitostursticosdeAlhu_5',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
             iconUrl: 'markers/guide.svg',
-            iconSize: [22.8, 22.8]
+            iconSize: [26.599999999999998, 26.599999999999998]
         }),
+                interactive: true,
             }
                     break;
             }
         }
-        map.createPane('pane_AtractivostursticosdeAlhu_4');
-        map.getPane('pane_AtractivostursticosdeAlhu_4').style.zIndex = 404;
-        map.getPane('pane_AtractivostursticosdeAlhu_4').style['mix-blend-mode'] = 'normal';
-        var layer_AtractivostursticosdeAlhu_4 = new L.geoJson(json_AtractivostursticosdeAlhu_4, {
-            attribution: '<a href=""></a>',
-            pane: 'pane_AtractivostursticosdeAlhu_4',
-            onEachFeature: pop_AtractivostursticosdeAlhu_4,
+        map.createPane('pane_HitostursticosdeAlhu_5');
+        map.getPane('pane_HitostursticosdeAlhu_5').style.zIndex = 405;
+        map.getPane('pane_HitostursticosdeAlhu_5').style['mix-blend-mode'] = 'normal';
+        var layer_HitostursticosdeAlhu_5 = new L.geoJson(json_HitostursticosdeAlhu_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_HitostursticosdeAlhu_5',
+            layerName: 'layer_HitostursticosdeAlhu_5',
+            pane: 'pane_HitostursticosdeAlhu_5',
+            onEachFeature: pop_HitostursticosdeAlhu_5,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_AtractivostursticosdeAlhu_4_0(feature));
+                return L.marker(latlng, style_HitostursticosdeAlhu_5_0(feature));
             },
         });
-        bounds_group.addLayer(layer_AtractivostursticosdeAlhu_4);
-        map.addLayer(layer_AtractivostursticosdeAlhu_4);
+        bounds_group.addLayer(layer_HitostursticosdeAlhu_5);
+        map.addLayer(layer_HitostursticosdeAlhu_5);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'Atractivos turísticos de Alhué<br /><table><tr><td style="text-align: center;"><img src="legend/AtractivostursticosdeAlhu_4_Actividadairelibre0.png" /></td><td>Actividad aire libre</td></tr><tr><td style="text-align: center;"><img src="legend/AtractivostursticosdeAlhu_4_ActividadApicola1.png" /></td><td>Actividad Apicola</td></tr><tr><td style="text-align: center;"><img src="legend/AtractivostursticosdeAlhu_4_Alojamiento2.png" /></td><td>Alojamiento</td></tr><tr><td style="text-align: center;"><img src="legend/AtractivostursticosdeAlhu_4_Artesana3.png" /></td><td>Artesanía</td></tr><tr><td style="text-align: center;"><img src="legend/AtractivostursticosdeAlhu_4_Atractivolocal4.png" /></td><td>Atractivo local</td></tr><tr><td style="text-align: center;"><img src="legend/AtractivostursticosdeAlhu_4_Atractivonatural5.png" /></td><td>Atractivo natural</td></tr><tr><td style="text-align: center;"><img src="legend/AtractivostursticosdeAlhu_4_Atractivopatrimonial6.png" /></td><td>Atractivo patrimonial</td></tr><tr><td style="text-align: center;"><img src="legend/AtractivostursticosdeAlhu_4_Biblioteca7.png" /></td><td>Biblioteca</td></tr><tr><td style="text-align: center;"><img src="legend/AtractivostursticosdeAlhu_4_Cementerio8.png" /></td><td>Cementerio</td></tr><tr><td style="text-align: center;"><img src="legend/AtractivostursticosdeAlhu_4_Centrodesalud9.png" /></td><td>Centro de salud</td></tr><tr><td style="text-align: center;"><img src="legend/AtractivostursticosdeAlhu_4_Estadio10.png" /></td><td>Estadio</td></tr><tr><td style="text-align: center;"><img src="legend/AtractivostursticosdeAlhu_4_Hitoreligioso11.png" /></td><td>Hito religioso</td></tr><tr><td style="text-align: center;"><img src="legend/AtractivostursticosdeAlhu_4_IglesiaSanJernimo12.png" /></td><td>Iglesia San Jerónimo</td></tr><tr><td style="text-align: center;"><img src="legend/AtractivostursticosdeAlhu_4_Molino13.png" /></td><td>Molino</td></tr><tr><td style="text-align: center;"><img src="legend/AtractivostursticosdeAlhu_4_Municipalidad14.png" /></td><td>Municipalidad</td></tr><tr><td style="text-align: center;"><img src="legend/AtractivostursticosdeAlhu_4_Museo15.png" /></td><td>Museo</td></tr><tr><td style="text-align: center;"><img src="legend/AtractivostursticosdeAlhu_4_Negociolocal16.png" /></td><td>Negocio local</td></tr><tr><td style="text-align: center;"><img src="legend/AtractivostursticosdeAlhu_4_PlazaParque17.png" /></td><td>Plaza/Parque</td></tr><tr><td style="text-align: center;"><img src="legend/AtractivostursticosdeAlhu_4_Restaurant18.png" /></td><td>Restaurant</td></tr><tr><td style="text-align: center;"><img src="legend/AtractivostursticosdeAlhu_4_Turismo19.png" /></td><td>Turismo</td></tr></table>': layer_AtractivostursticosdeAlhu_4,'Cerros de Alhué<br /><table><tr><td style="text-align: center;"><img src="legend/CerrosdeAlhu_3_AltodeCantillana0.png" /></td><td>Alto de Cantillana</td></tr><tr><td style="text-align: center;"><img src="legend/CerrosdeAlhu_3_ElMorro1.png" /></td><td>El Morro</td></tr></table>': layer_CerrosdeAlhu_3,'<img src="legend/RobleradelcobredeLoncha_2.png" /> Roblería del cobre de Loncha': layer_RobleradelcobredeLoncha_2,'<img src="legend/SanJuandePicheAltosdeCantillana_1.png" /> San Juan de Piche/Altos de Cantillana': layer_SanJuandePicheAltosdeCantillana_1,'<img src="legend/LimiteComunal_0.png" /> Limite Comunal': layer_LimiteComunal_0,}).addTo(map);
+        L.control.layers(baseMaps,{'Hitos turísticos de Alhué<br /><table><tr><td style="text-align: center;"><img src="legend/HitostursticosdeAlhu_5_Actividadairelibre0.png" /></td><td>Actividad aire libre</td></tr><tr><td style="text-align: center;"><img src="legend/HitostursticosdeAlhu_5_ActividadApicola1.png" /></td><td>Actividad Apicola</td></tr><tr><td style="text-align: center;"><img src="legend/HitostursticosdeAlhu_5_Alojamiento2.png" /></td><td>Alojamiento</td></tr><tr><td style="text-align: center;"><img src="legend/HitostursticosdeAlhu_5_Artesanía3.png" /></td><td>Artesanía</td></tr><tr><td style="text-align: center;"><img src="legend/HitostursticosdeAlhu_5_Atractivolocal4.png" /></td><td>Atractivo local</td></tr><tr><td style="text-align: center;"><img src="legend/HitostursticosdeAlhu_5_Atractivonatural5.png" /></td><td>Atractivo natural</td></tr><tr><td style="text-align: center;"><img src="legend/HitostursticosdeAlhu_5_Atractivopatrimonial6.png" /></td><td>Atractivo patrimonial</td></tr><tr><td style="text-align: center;"><img src="legend/HitostursticosdeAlhu_5_Biblioteca7.png" /></td><td>Biblioteca</td></tr><tr><td style="text-align: center;"><img src="legend/HitostursticosdeAlhu_5_Cementerio8.png" /></td><td>Cementerio</td></tr><tr><td style="text-align: center;"><img src="legend/HitostursticosdeAlhu_5_Centrodesalud9.png" /></td><td>Centro de salud</td></tr><tr><td style="text-align: center;"><img src="legend/HitostursticosdeAlhu_5_Estadio10.png" /></td><td>Estadio</td></tr><tr><td style="text-align: center;"><img src="legend/HitostursticosdeAlhu_5_Hitoreligioso11.png" /></td><td>Hito religioso</td></tr><tr><td style="text-align: center;"><img src="legend/HitostursticosdeAlhu_5_IglesiaSanJerónimo12.png" /></td><td>Iglesia San Jerónimo</td></tr><tr><td style="text-align: center;"><img src="legend/HitostursticosdeAlhu_5_Molino13.png" /></td><td>Molino</td></tr><tr><td style="text-align: center;"><img src="legend/HitostursticosdeAlhu_5_MonumentoHistóricoNacional14.png" /></td><td>Monumento Histórico Nacional</td></tr><tr><td style="text-align: center;"><img src="legend/HitostursticosdeAlhu_5_Municipalidad15.png" /></td><td>Municipalidad</td></tr><tr><td style="text-align: center;"><img src="legend/HitostursticosdeAlhu_5_Museo16.png" /></td><td>Museo</td></tr><tr><td style="text-align: center;"><img src="legend/HitostursticosdeAlhu_5_Negociolocal17.png" /></td><td>Negocio local</td></tr><tr><td style="text-align: center;"><img src="legend/HitostursticosdeAlhu_5_PlazaParque18.png" /></td><td>Plaza/Parque</td></tr><tr><td style="text-align: center;"><img src="legend/HitostursticosdeAlhu_5_Restaurant19.png" /></td><td>Restaurant</td></tr><tr><td style="text-align: center;"><img src="legend/HitostursticosdeAlhu_5_Turismo20.png" /></td><td>Turismo</td></tr></table>': layer_HitostursticosdeAlhu_5,'Cerros<br /><table><tr><td style="text-align: center;"><img src="legend/Cerros_4_AltodeCantillana0.png" /></td><td>Alto de Cantillana</td></tr><tr><td style="text-align: center;"><img src="legend/Cerros_4_MorrodeTalamí1.png" /></td><td>Morro de Talamí</td></tr></table>': layer_Cerros_4,'<img src="legend/Santuariosdelanaturaleza_3.png" /> Santuarios de la naturaleza': layer_Santuariosdelanaturaleza_3,'<img src="legend/RobleradelCobredeLoncha_2.png" /> Roblería del Cobre de Loncha': layer_RobleradelCobredeLoncha_2,'<img src="legend/ComunadeAlhu_1.png" /> Comuna de Alhué': layer_ComunadeAlhu_1,"OSM Standard": layer_OSMStandard_0,}).addTo(map);
         setBounds();
-        map.addControl(new L.Control.Search({
-            layer: layer_AtractivostursticosdeAlhu_4,
-            initial: false,
-            hideMarkerOnCollapse: true,
-            propertyName: 'Atractivo'}));
+        resetLabels([layer_HitostursticosdeAlhu_5]);
+        map.on("zoomend", function(){
+            resetLabels([layer_HitostursticosdeAlhu_5]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_HitostursticosdeAlhu_5]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_HitostursticosdeAlhu_5]);
+        });
         </script>
     </body>
 </html>
